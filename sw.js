@@ -1,4 +1,4 @@
-const CACHE = 'tutor-v5';
+const CACHE = 'tutor-v6';
 const ASSETS = [
   './',
   './index.html'
