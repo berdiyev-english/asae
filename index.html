@@ -51,11 +51,11 @@
 }
 
 /* ═══ BASE ═══ */
-html,body{height:100%;overflow:hidden;position:fixed;width:100%;overscroll-behavior:none}
+html,body{height:100%;overflow:hidden;width:100%;overscroll-behavior:none;touch-action:manipulation}
 body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;transition:background .3s,color .3s}
 input,select,textarea,button{font-family:inherit}
 
-#app{position:fixed;top:0;left:0;right:0;bottom:0;max-width:520px;margin:0 auto;display:flex;flex-direction:column;overflow:hidden}
+#app{position:absolute;top:0;left:0;right:0;height:100%;height:100dvh;max-width:520px;margin:0 auto;display:flex;flex-direction:column;overflow:hidden}
 #app::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 25% 0%,var(--grad1),transparent 55%),radial-gradient(ellipse at 80% 100%,var(--grad2),transparent 50%);pointer-events:none;z-index:0;transition:background .3s}
 
 /* ═══ WELCOME ═══ */
@@ -682,14 +682,12 @@ function rSch(){
 }
 
 function sBdg(l){
-  const m={
-    conducted:'<span class="ltag done">✅ проведён</span>',
-    scheduled:'<span class="ltag sched">⏳ запланирован</span>',
-    upcoming:'<span class="ltag soon">🔜 скоро</span>',
-    cancelled:'<span class="ltag canc">❌ отменён</span>',
-    rescheduled:'<span class="ltag resc">📅 перенесён'+(l.mod?' → '+fS(l.mod.nD)+' '+l.mod.nT:'')+'</span>'
-  };
-  return m[l.status]||'';
+  if(l.status === 'conducted') return '<span class="ltag done">✅ проведён</span>';
+  if(l.status === 'scheduled') return '<span class="ltag sched">⏳ запланирован</span>';
+  if(l.status === 'upcoming') return '<span class="ltag soon">🔜 скоро</span>';
+  if(l.status === 'cancelled') return '<span class="ltag canc">❌ отменён</span>';
+  if(l.status === 'rescheduled') return '<span class="ltag resc">📅 перенесён'+(l.mod && l.mod.nD ? ' → '+fS(l.mod.nD)+' '+l.mod.nT : '')+'</span>';
+  return '';
 }
 
 // ═══ RENDER STUDENTS ═══
