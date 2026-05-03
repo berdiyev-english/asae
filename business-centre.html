@@ -2,16 +2,13 @@
 <html lang="ru" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>БЦ Петровский — Аренда офисов премиум-класса на Петровском острове</title>
-    <meta name="description" content="Аренда офисов класса B и B+ в бизнес-центре Петровский. Петровская коса 1/1. Управляющая компания Супер Сервис.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>БЦ Петровский</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -35,7 +32,7 @@
             }
         }
     </script>
-    
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -43,9 +40,9 @@
             color: #1C1C1C;
             overflow-x: hidden;
         }
-        
+
         .font-serif { font-family: 'Playfair Display', serif; }
-        
+
         /* Preloader */
         #preloader {
             position: fixed; inset: 0; background: #1C1C1C; z-index: 9999;
@@ -66,39 +63,38 @@
             font-family: 'Inter', sans-serif; font-size: 11px; color: #B8956A;
             letter-spacing: 0.6em; text-transform: uppercase; margin-top: 16px; opacity: 0; font-weight: 300;
         }
-        
+
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #FAF9F6; }
         ::-webkit-scrollbar-thumb { background: #B8956A; border-radius: 3px; }
-        
+
         .reveal { opacity: 0; transform: translateY(40px); }
-        
+
         .gold-gradient-text {
             background: linear-gradient(135deg, #B8956A 0%, #D4B896 50%, #96794E 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-        
+
         .space-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .space-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(28, 28, 28, 0.15); }
-        
+
         .btn-gold {
             background: linear-gradient(135deg, #B8956A 0%, #96794E 100%);
             transition: all 0.3s ease;
         }
         .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(184, 149, 106, 0.5); }
-        
+
         .btn-outline-gold {
             border: 1px solid #B8956A; color: #B8956A; transition: all 0.3s ease;
         }
         .btn-outline-gold:hover { background: #B8956A; color: white; transform: translateY(-2px); }
-        
+
         .input-premium:focus { border-color: #B8956A; box-shadow: 0 0 0 3px rgba(184, 149, 106, 0.1); }
-        
+
         .gallery-item { overflow: hidden; }
         .gallery-item img { transition: transform 0.7s ease; width: 100%; height: 100%; object-fit: cover; }
         .gallery-item:hover img { transform: scale(1.05); }
-        
-        /* LIQUID GLASS — десктоп только */
+
         .nav-liquid-glass {
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -108,29 +104,77 @@
                 0 4px 30px rgba(0, 0, 0, 0.05),
                 inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
-        
+
         .deco-circle {
             position: absolute; border-radius: 50%;
             background: radial-gradient(circle, rgba(184,149,106,0.08) 0%, transparent 70%);
             pointer-events: none;
         }
-        
+
         /* Map styles */
         .route-btn {
             transition: all 0.3s ease; cursor: pointer;
             border-left: 2px solid transparent;
+            background: transparent;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 13px;
+            white-space: nowrap;
         }
         .route-btn:hover, .route-btn.active {
             background: rgba(184, 149, 106, 0.1);
             border-left-color: #B8956A;
         }
-        
+
+        /* ===== MAP FIXES ===== */
+        #map-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+        }
+
+        .route-buttons-mobile {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .route-buttons-desktop {
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .quick-routes-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4px;
+        }
+
+        @media (min-width: 640px) {
+            .quick-routes-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .quick-routes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Mobile fixes */
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 2.25rem !important; line-height: 1.15 !important; }
             .preloader-text { font-size: 2rem !important; letter-spacing: 0.15em; }
-            
-            /* Мобильное меню — сплошной фон, НЕ backdrop-filter */
+
             #mobile-menu {
                 max-height: calc(100vh - 80px);
                 overflow-y: auto;
@@ -140,26 +184,27 @@
                 border-top: 1px solid #EAE6DD;
                 box-shadow: 0 10px 40px rgba(0,0,0,0.12);
             }
-            
-            /* Навбар на мобиле — всегда сплошной */
+
             #navbar {
                 background: rgba(250, 249, 246, 0.98) !important;
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
             }
-            
+
             .space-card .p-6 { padding: 1.25rem; }
             .space-card h3 { font-size: 1.125rem; }
+
+            #map {
+                min-height: 300px !important;
+                height: 300px !important;
+            }
         }
-        
-        /* Карта — защита от вылезания */
-        #map,
+
         #map ymaps,
         #map [class*="ymaps-"] {
             max-width: 100% !important;
         }
     </style>
-<base target="_blank">
 <base target="_blank">
 </head>
 <body class="antialiased">
@@ -182,21 +227,21 @@
                     ПЕТРОВСКИЙ
                     <span class="block h-px w-0 group-hover:w-full bg-gold transition-all duration-500"></span>
                 </a>
-                
+
                 <div class="hidden md:flex items-center space-x-8 lg:space-x-10">
                     <a href="#about" class="text-xs lg:text-sm tracking-widest uppercase text-dark-soft hover:text-gold transition-colors duration-300">О комплексе</a>
                     <a href="#spaces" class="text-xs lg:text-sm tracking-widest uppercase text-dark-soft hover:text-gold transition-colors duration-300">Помещения</a>
                     <a href="#gallery" class="text-xs lg:text-sm tracking-widest uppercase text-dark-soft hover:text-gold transition-colors duration-300">Галерея</a>
                     <a href="#contacts" class="text-xs lg:text-sm tracking-widest uppercase text-dark-soft hover:text-gold transition-colors duration-300">Контакты</a>
                 </div>
-                
+
                 <div class="hidden md:flex items-center space-x-4 lg:space-x-6">
                     <a href="tel:+78123468887" class="text-xs lg:text-sm font-medium text-dark hover:text-gold transition-colors duration-300 whitespace-nowrap">+7 (812) 346-88-87</a>
                     <button onclick="openModal()" class="btn-gold text-white px-4 lg:px-6 py-2.5 lg:py-3 text-[10px] lg:text-xs tracking-widest uppercase font-medium rounded-sm whitespace-nowrap">
                         Заявка
                     </button>
                 </div>
-                
+
                 <button id="mobile-menu-btn" class="md:hidden text-dark p-2 -mr-2">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
@@ -204,8 +249,7 @@
                 </button>
             </div>
         </div>
-        
-        <!-- МОБИЛЬНОЕ МЕНЮ — сплошной фон, без backdrop-filter -->
+
         <div id="mobile-menu" class="hidden md:hidden absolute w-full mt-4">
             <div class="px-6 py-6 space-y-4">
                 <a href="#about" class="block text-sm tracking-widest uppercase text-dark-soft hover:text-gold py-2">О комплексе</a>
@@ -226,7 +270,7 @@
     <section class="relative min-h-screen flex items-center overflow-hidden bg-cream">
         <div class="deco-circle w-[400px] h-[400px] md:w-[600px] md:h-[600px] -top-20 -right-20 md:-top-40 md:-right-40"></div>
         <div class="deco-circle w-[300px] h-[300px] md:w-[400px] md:h-[400px] bottom-10 -left-10 md:bottom-20 md:-left-20"></div>
-        
+
         <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 pt-24 md:pt-32 pb-16 md:pb-20 relative z-10 w-full">
             <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <div class="hero-content order-2 lg:order-1">
@@ -234,17 +278,17 @@
                         <div class="h-px w-8 md:w-12 bg-gold"></div>
                         <span class="text-[10px] md:text-xs tracking-[0.3em] uppercase text-gray-warm font-medium">Бизнес-центр премиум-класса</span>
                     </div>
-                    
+
                     <h1 class="font-serif text-4xl md:text-5xl lg:text-7xl leading-[1.1] mb-6 md:mb-8 text-dark opacity-0" id="hero-title">
-                        БЦ Петровский<br>
+                        БЦ Петровский -<br>
                         <span class="italic text-gold">место где ваш бизнес растет</span>
                     </h1>
-                    
+
                     <p class="text-base md:text-lg text-gray-warm leading-relaxed mb-8 md:mb-10 max-w-lg opacity-0" id="hero-subtitle">
                         Петровский остров — офисы в парковой зоне дельты Невы. 
                         Свежий воздух, тишина и статусная локация. Аренда от 2 268 ₽ за м².
                     </p>
-                    
+
                     <div class="flex flex-wrap gap-3 md:gap-4 opacity-0" id="hero-buttons">
                         <a href="#spaces" class="btn-gold text-white px-6 md:px-8 py-3.5 md:py-4 text-[10px] md:text-xs tracking-widest uppercase font-medium rounded-sm inline-block">
                             Смотреть помещения
@@ -256,7 +300,7 @@
                             Позвонить
                         </a>
                     </div>
-                    
+
                     <div class="mt-10 md:mt-16 flex flex-wrap items-center gap-6 md:gap-8 opacity-0" id="hero-stats">
                         <div>
                             <div class="font-serif text-2xl md:text-3xl text-gold">7 500 м²</div>
@@ -274,7 +318,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="relative order-1 lg:order-2 opacity-0" id="hero-visual">
                     <div class="relative aspect-[4/3] lg:aspect-[4/5] rounded-sm overflow-hidden shadow-2xl">
                         <img src="https://bc-petrovsky.net/templates/bc/images/bg_bc.jpg" alt="БЦ Петровский" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #EAE6DD, #F5F3EE)'; this.parentElement.innerHTML='<div class=\'flex items-center justify-center h-full font-serif text-gold/30 text-4xl\'>ПЕТРОВСКИЙ</div>'">
@@ -287,7 +331,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="font-medium text-dark text-xs md:text-sm">Офисы от 33 м²</p>
+                                <p class="font-medium text-dark text-xs md:text-sm">Офисы от 20 м²</p>
                                 <p class="text-[10px] md:text-xs text-gray-warm mt-1">Современные планировки с ремонтом</p>
                             </div>
                         </div>
@@ -295,7 +339,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 opacity-0" id="scroll-indicator">
             <span class="text-[10px] tracking-[0.3em] uppercase text-gray-warm">Листайте</span>
             <div class="w-px h-8 md:h-12 bg-gradient-to-b from-gold to-transparent"></div>
@@ -315,7 +359,7 @@
                     Ищете идеальное пространство<br>для бизнеса?
                 </h2>
             </div>
-            
+
             <div class="grid md:grid-cols-3 gap-6 md:gap-8">
                 <div class="group p-6 md:p-8 border border-cream-dark hover:border-gold/50 transition-all duration-500 reveal">
                     <div class="w-12 h-12 md:w-14 md:h-14 bg-cream-warm group-hover:bg-gold/10 rounded-sm flex items-center justify-center mb-4 md:mb-6 transition-colors duration-500">
@@ -329,7 +373,7 @@
                         Сотрудники работают эффективнее, когда вокруг природа, а не пробки и шум.
                     </p>
                 </div>
-                
+
                 <div class="group p-6 md:p-8 border border-cream-dark hover:border-gold/50 transition-all duration-500 reveal">
                     <div class="w-12 h-12 md:w-14 md:h-14 bg-cream-warm group-hover:bg-gold/10 rounded-sm flex items-center justify-center mb-4 md:mb-6 transition-colors duration-500">
                         <svg class="w-6 h-6 md:w-7 md:h-7 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -342,7 +386,7 @@
                         по цене обычного офиса. Юридические адреса от собственника от 5 м².
                     </p>
                 </div>
-                
+
                 <div class="group p-6 md:p-8 border border-cream-dark hover:border-gold/50 transition-all duration-500 reveal">
                     <div class="w-12 h-12 md:w-14 md:h-14 bg-cream-warm group-hover:bg-gold/10 rounded-sm flex items-center justify-center mb-4 md:mb-6 transition-colors duration-500">
                         <svg class="w-6 h-6 md:w-7 md:h-7 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -372,7 +416,7 @@
                     Интерьеры и экстерьеры<br><span class="italic text-gold">БЦ Петровский</span>
                 </h2>
             </div>
-            
+
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                 <div class="gallery-item rounded-sm aspect-square reveal">
                     <img src="https://bc-petrovsky.net/templates/bc/images/muzey.jpg" alt="Интерьер" loading="lazy">
@@ -410,7 +454,7 @@
                 </h2>
                 <p class="text-gray-warm mt-4 md:mt-6 text-sm md:text-base">Поможем подобрать площадь под задачи вашего бизнеса.</p>
             </div>
-            
+
             <div class="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
                 <div class="space-card bg-white rounded-sm overflow-hidden border border-cream-dark reveal">
                     <div class="aspect-[16/10] bg-cream-warm relative overflow-hidden">
@@ -428,7 +472,7 @@
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="space-card bg-white rounded-sm overflow-hidden border border-cream-dark reveal">
                     <div class="aspect-[16/10] bg-cream-dark relative overflow-hidden">
                         <img src="https://berdiyev-english.github.io/asae/photo_2026-05-03_17-31-03.jpg" alt="Класс B" class="w-full h-full object-cover" loading="lazy">
@@ -446,7 +490,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="mt-10 md:mt-12 text-center reveal">
                 <p class="text-gray-warm mb-4 md:mb-6 text-sm">Нужна другая площадь? В комплексе есть помещения от 20 до 500 м².</p>
                 <button onclick="openModal()" class="btn-outline-gold px-6 md:px-8 py-3.5 md:py-4 text-[10px] md:text-xs tracking-widest uppercase font-medium rounded-sm">
@@ -488,7 +532,7 @@
                             площадью 4 000 м².
                         </p>
                     </div>
-                    
+
                     <div class="mt-8 md:mt-10 pt-6 md:pt-10 border-t border-cream-dark">
                         <div class="flex items-center gap-4 md:gap-6">
                             <div class="w-12 h-12 md:w-16 md:h-16 bg-cream-warm rounded-full flex items-center justify-center flex-shrink-0">
@@ -503,7 +547,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="grid grid-cols-2 gap-3 md:gap-4 reveal">
                     <div class="space-y-3 md:space-y-4 mt-0 md:mt-8">
                         <div class="bg-cream-warm p-6 md:p-8 rounded-sm">
@@ -547,15 +591,16 @@
                     Как до нас<br><span class="italic text-gold">добраться</span>
                 </h2>
             </div>
-            
+
             <div class="bg-white rounded-sm shadow-lg overflow-hidden reveal">
                 <div class="grid lg:grid-cols-4">
                     <!-- Sidebar -->
                     <div class="lg:col-span-1 p-4 md:p-6 lg:p-8 bg-cream border-b lg:border-b-0 lg:border-r border-cream-dark">
                         <h3 class="font-serif text-lg md:text-xl text-dark mb-4 md:mb-6">Маршруты</h3>
-                        
-                        <div class="flex lg:flex-col gap-2 mb-4 md:mb-8 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0">
-                            <div class="route-btn active px-3 py-2 text-xs md:text-sm text-dark cursor-pointer rounded-sm whitespace-nowrap" onclick="setRouteType('auto', this)">
+
+                        <!-- Типы маршрутов -->
+                        <div class="route-buttons-mobile lg:route-buttons-desktop mb-4 md:mb-8">
+                            <div class="route-btn active" onclick="setRouteType('auto', this)">
                                 <div class="flex items-center gap-2">
                                     <svg class="w-4 h-4 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/>
@@ -564,7 +609,7 @@
                                     На машине
                                 </div>
                             </div>
-                            <div class="route-btn px-3 py-2 text-xs md:text-sm text-dark cursor-pointer rounded-sm whitespace-nowrap" onclick="setRouteType('masstransit', this)">
+                            <div class="route-btn" onclick="setRouteType('masstransit', this)">
                                 <div class="flex items-center gap-2">
                                     <svg class="w-4 h-4 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
@@ -572,7 +617,7 @@
                                     Общ. транспорт
                                 </div>
                             </div>
-                            <div class="route-btn px-3 py-2 text-xs md:text-sm text-dark cursor-pointer rounded-sm whitespace-nowrap" onclick="setRouteType('pedestrian', this)">
+                            <div class="route-btn" onclick="setRouteType('pedestrian', this)">
                                 <div class="flex items-center gap-2">
                                     <svg class="w-4 h-4 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
@@ -581,24 +626,24 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="mb-4 md:mb-6">
                             <label class="block text-[10px] md:text-xs uppercase tracking-wider text-gray-warm mb-2">Откуда</label>
                             <input type="text" id="route-from" class="w-full bg-white border border-cream-dark rounded-sm px-3 py-2 text-xs md:text-sm text-dark focus:outline-none input-premium" placeholder="Введите адрес">
                         </div>
-                        
+
                         <div class="mb-4 md:mb-6">
                             <label class="block text-[10px] md:text-xs uppercase tracking-wider text-gray-warm mb-2">Куда</label>
                             <input type="text" disabled value='БЦ "Петровский"' class="w-full bg-cream-warm border border-cream-dark rounded-sm px-3 py-2 text-xs md:text-sm text-gray-warm cursor-not-allowed">
                         </div>
-                        
+
                         <button onclick="buildCustomRoute()" class="w-full btn-gold text-white py-2.5 md:py-3 text-[10px] md:text-xs tracking-widest uppercase font-medium rounded-sm mb-6 md:mb-8">
                             Проложить маршрут
                         </button>
-                        
+
                         <div class="border-t border-cream-dark pt-4 md:pt-6">
                             <div class="text-[10px] md:text-xs uppercase tracking-wider text-gray-warm mb-2 md:mb-3">Быстрые маршруты</div>
-                            <div class="space-y-1 md:space-y-2">
+                            <div class="quick-routes-grid">
                                 <button onclick="setRoute('Санкт-Петербург, метро Крестовский остров')" class="w-full text-left px-2 md:px-3 py-1.5 md:py-2 text-xs md:text-sm text-dark hover:text-gold hover:bg-cream-warm rounded-sm transition-colors">м. Крестовский остров</button>
                                 <button onclick="setRoute('Санкт-Петербург, метро Чкаловская')" class="w-full text-left px-2 md:px-3 py-1.5 md:py-2 text-xs md:text-sm text-dark hover:text-gold hover:bg-cream-warm rounded-sm transition-colors">м. Чкаловская</button>
                                 <button onclick="setRoute('Санкт-Петербург, метро Спортивная')" class="w-full text-left px-2 md:px-3 py-1.5 md:py-2 text-xs md:text-sm text-dark hover:text-gold hover:bg-cream-warm rounded-sm transition-colors">м. Спортивная</button>
@@ -608,14 +653,23 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Map -->
-                    <div class="lg:col-span-3 relative h-[300px] md:h-[400px] lg:h-[600px] overflow-hidden">
-                        <div id="map" class="absolute inset-0 w-full h-full"></div>
+                    <div class="lg:col-span-3 relative" id="map-container" style="height: 300px;">
+                        <div id="map" style="width: 100%; height: 100%;"></div>
+                        <!-- Fallback если карта не загрузится -->
+                        <div id="map-fallback" style="display:none; position:absolute; inset:0; background:#F5F3EE; align-items:center; justify-content:center; flex-direction:column; gap:12px;">
+                            <svg class="w-12 h-12 text-gold/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <p class="text-gray-warm text-sm">Карта загружается...</p>
+                            <p class="text-gray-warm/60 text-xs">Петровская коса, д. 1, корп. 1</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="mt-8 md:mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 reveal">
                 <div class="flex items-start gap-3 md:gap-4">
                     <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
@@ -629,7 +683,7 @@
                         <div class="text-xs md:text-sm text-gray-warm">Санкт-Петербург, Петровская коса, д. 1, корп. 1</div>
                     </div>
                 </div>
-                
+
                 <div class="flex items-start gap-3 md:gap-4">
                     <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
                         <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -641,7 +695,7 @@
                         <a href="tel:+78123468887" class="text-xs md:text-sm text-gray-warm hover:text-gold transition-colors">+7 (812) 346-88-87</a>
                     </div>
                 </div>
-                
+
                 <div class="flex items-start gap-3 md:gap-4">
                     <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
                         <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -662,7 +716,7 @@
         <div class="absolute inset-0 opacity-10">
             <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,_#B8956A_0%,_transparent_50%)]"></div>
         </div>
-        
+
         <div class="max-w-4xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-10 md:mb-16 reveal">
                 <div class="flex items-center justify-center gap-4 mb-6">
@@ -678,7 +732,7 @@
                     Расскажите о ваших задачах, и наш специалист предложит оптимальные варианты помещений под ваш бюджет
                 </p>
             </div>
-            
+
             <form class="max-w-xl mx-auto space-y-4 md:space-y-6 reveal" onsubmit="handleFormSubmit(event)">
                 <div class="grid md:grid-cols-2 gap-4 md:gap-6">
                     <div>
@@ -712,20 +766,20 @@
                     <div class="font-serif text-lg md:text-xl tracking-widest text-cream mb-1 md:mb-2">ПЕТРОВСКИЙ</div>
                     <div class="text-[10px] md:text-xs text-cream/40">Бизнес-центр премиум-класса</div>
                 </div>
-                
+
                 <div class="flex flex-wrap items-center justify-center gap-4 md:gap-8">
                     <a href="#about" class="text-[10px] md:text-xs uppercase tracking-wider text-cream/40 hover:text-gold transition-colors">О комплексе</a>
                     <a href="#spaces" class="text-[10px] md:text-xs uppercase tracking-wider text-cream/40 hover:text-gold transition-colors">Помещения</a>
                     <a href="#gallery" class="text-[10px] md:text-xs uppercase tracking-wider text-cream/40 hover:text-gold transition-colors">Галерея</a>
                     <a href="#contacts-map" class="text-[10px] md:text-xs uppercase tracking-wider text-cream/40 hover:text-gold transition-colors">Контакты</a>
                 </div>
-                
+
                 <div class="text-center md:text-right">
                     <a href="tel:+78123468887" class="text-gold font-medium text-sm md:text-base">+7 (812) 346-88-87</a>
                     <div class="text-[10px] md:text-xs text-cream/40 mt-1">Пн-Пт 9:00 — 18:00</div>
                 </div>
             </div>
-            
+
             <div class="mt-8 md:mt-10 pt-4 md:pt-6 border-t border-cream/5 text-center">
                 <p class="text-[10px] md:text-xs text-cream/30">
                     © <span id="year"></span> БЦ «Петровский». Управляющая компания ООО «Петровский ФМ». Все права защищены.
@@ -748,12 +802,12 @@
                             </svg>
                         </button>
                     </div>
-                    
+
                     <div id="modal-office-info" class="hidden mb-6 p-4 bg-cream-warm rounded-sm">
                         <div class="text-[10px] md:text-xs text-gray-warm uppercase tracking-wider mb-1">Выбрано помещение</div>
                         <div class="font-medium text-dark text-sm md:text-base" id="modal-office-text"></div>
                     </div>
-                    
+
                     <form onsubmit="handleModalSubmit(event)" class="space-y-4">
                         <div>
                             <label class="block text-[10px] md:text-xs uppercase tracking-wider text-gray-warm mb-2">Ваше имя *</label>
@@ -778,7 +832,7 @@
 
     <!-- Yandex Maps API -->
     <script src="https://api-maps.yandex.ru/2.1/?apikey=50b80b81-85a4-49f2-8130-fec8edad4d4e&lang=ru_RU" type="text/javascript"></script>
-    
+
     <script>
         // Preloader
         const preloaderTl = gsap.timeline();
@@ -794,7 +848,7 @@
                 delay: 0.4,
                 onComplete: () => { document.getElementById('preloader').style.display = 'none'; }
             });
-        
+
         // Hero
         const heroTl = gsap.timeline({ delay: 2.8 });
         heroTl
@@ -805,7 +859,7 @@
             .to('#hero-stats', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.5')
             .to('#hero-visual', { opacity: 1, x: 0, duration: 1.2, ease: 'power2.out' }, '-=1')
             .to('#scroll-indicator', { opacity: 1, duration: 1 }, '-=0.5');
-        
+
         // Scroll Reveals
         gsap.registerPlugin(ScrollTrigger);
         gsap.utils.toArray('.reveal').forEach((elem) => {
@@ -817,11 +871,11 @@
                 }
             );
         });
-        
-        // Navbar — Liquid Glass на десктопе, сплошной фон на мобиле
+
+        // Navbar
         const navbar = document.getElementById('navbar');
         const isMobile = window.innerWidth < 768;
-        
+
         window.addEventListener('scroll', () => {
             if (window.pageYOffset > 100) {
                 if (isMobile) {
@@ -836,28 +890,27 @@
                 navbar.classList.add('py-4', 'md:py-6');
             }
         });
-        
+
         // Mobile menu
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        
+
         mobileBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
-        
-        // Close mobile menu on link click
+
         mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
             });
         });
-        
+
         // Modal
         const modal = document.getElementById('modal');
         const modalContent = document.getElementById('modal-content');
         const modalOfficeInfo = document.getElementById('modal-office-info');
         const modalOfficeText = document.getElementById('modal-office-text');
-        
+
         function openModal(officeInfo = null) {
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
@@ -872,7 +925,7 @@
                 modalContent.classList.add('scale-100', 'opacity-100');
             }, 10);
         }
-        
+
         function closeModal() {
             modalContent.classList.remove('scale-100', 'opacity-100');
             modalContent.classList.add('scale-95', 'opacity-0');
@@ -881,22 +934,22 @@
                 document.body.style.overflow = '';
             }, 300);
         }
-        
+
         function handleFormSubmit(e) {
             e.preventDefault();
             alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
             e.target.reset();
         }
-        
+
         function handleModalSubmit(e) {
             e.preventDefault();
             alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
             closeModal();
             e.target.reset();
         }
-        
+
         document.getElementById('year').textContent = new Date().getFullYear();
-        
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -907,53 +960,94 @@
                 }
             });
         });
-        
-        // Yandex Maps
+
+        // ===== YANDEX MAPS =====
         let myMap, multiRoute;
         const DEST_POINT = [59.962809, 30.251136];
         let currentRouteType = 'auto';
-        
-        ymaps.ready(initMap);
-        
-        function initMap() {
-            myMap = new ymaps.Map("map", {
-                center: DEST_POINT,
-                zoom: 15,
-                controls: ['zoomControl', 'fullscreenControl']
-            });
-            
-            const placemark = new ymaps.Placemark(DEST_POINT, {
-                balloonContent: 'БЦ "Петровский"<br>Петровская коса, д. 1, корп. 1<br>+7 (812) 346-88-87'
-            }, {
-                preset: 'islands#icon',
-                iconColor: '#B8956A'
-            });
-            
-            myMap.geoObjects.add(placemark);
+
+        // Fallback if API fails
+        function showMapFallback() {
+            const fallback = document.getElementById('map-fallback');
+            if (fallback) {
+                fallback.style.display = 'flex';
+            }
         }
-        
+
+        // Initialize map with custom placemark
+        function initMap() {
+            try {
+                myMap = new ymaps.Map("map", {
+                    center: DEST_POINT,
+                    zoom: 15,
+                    controls: ['zoomControl', 'fullscreenControl']
+                });
+
+                // Custom placemark with building icon
+                const placemark = new ymaps.Placemark(DEST_POINT, {
+                    balloonContent: '<div style="font-family:Inter,sans-serif;padding:8px;">' +
+                        '<div style="font-weight:600;font-size:14px;color:#1C1C1C;margin-bottom:4px;">БЦ "Петровский"</div>' +
+                        '<div style="font-size:12px;color:#8C8578;margin-bottom:2px;">Петровская коса, д. 1, корп. 1</div>' +
+                        '<div style="font-size:12px;color:#B8956A;">+7 (812) 346-88-87</div>' +
+                        '</div>'
+                }, {
+                    // Custom icon - building/office style
+                    iconLayout: 'default#imageWithContent',
+                    iconImageHref: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNCOUE1NkEiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xMiA3VjNMMiA3SDEyWk0xMiAxN1Y3SDJWMTdIMTJaTTEyIDE3VjIxTDIyIDE3SDEyWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cjwvc3ZnPg==',
+                    iconImageSize: [40, 40],
+                    iconImageOffset: [-20, -40],
+                    iconContentLayout: ymaps.templateLayoutFactory.createClass(
+                        '<div style="color:white;font-size:10px;font-weight:600;text-align:center;line-height:40px;">БЦ</div>'
+                    )
+                });
+
+                myMap.geoObjects.add(placemark);
+
+                // Hide fallback on success
+                const fallback = document.getElementById('map-fallback');
+                if (fallback) fallback.style.display = 'none';
+
+            } catch (e) {
+                console.error('Map init error:', e);
+                showMapFallback();
+            }
+        }
+
+        // Safe map init
+        if (typeof ymaps !== 'undefined') {
+            ymaps.ready(initMap);
+        } else {
+            console.error('Yandex Maps API not loaded');
+            showMapFallback();
+        }
+
         function setRouteType(type, elem) {
             currentRouteType = type;
             document.querySelectorAll('.route-btn').forEach(btn => btn.classList.remove('active'));
             elem.classList.add('active');
         }
-        
+
         function setRoute(address) {
             document.getElementById('route-from').value = address;
             buildCustomRoute();
         }
-        
+
         function buildCustomRoute() {
             const from = document.getElementById('route-from').value;
             if (!from) {
                 alert('Введите адрес отправления');
                 return;
             }
-            
+
+            if (!myMap) {
+                alert('Карта еще загружается, подождите немного');
+                return;
+            }
+
             if (multiRoute) {
                 myMap.geoObjects.remove(multiRoute);
             }
-            
+
             multiRoute = new ymaps.multiRouter.MultiRoute({
                 referencePoints: [from, DEST_POINT],
                 params: { routingMode: currentRouteType }
@@ -963,7 +1057,7 @@
                 wayPointFinishIconColor: '#1C1C1C',
                 routeActiveStrokeColor: '#B8956A'
             });
-            
+
             myMap.geoObjects.add(multiRoute);
         }
     </script>
