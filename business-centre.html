@@ -98,7 +98,16 @@
         .gallery-item img { transition: transform 0.7s ease; width: 100%; height: 100%; object-fit: cover; }
         .gallery-item:hover img { transform: scale(1.05); }
         
-        .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        /* LIQUID GLASS — десктоп только */
+        .nav-liquid-glass {
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: rgba(250, 249, 246, 0.72);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 4px 30px rgba(0, 0, 0, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
         
         .deco-circle {
             position: absolute; border-radius: 50%;
@@ -118,11 +127,39 @@
         
         /* Mobile fixes */
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.5rem !important; }
+            .hero-content h1 { font-size: 2.25rem !important; line-height: 1.15 !important; }
             .preloader-text { font-size: 2rem !important; letter-spacing: 0.15em; }
-            #mobile-menu { max-height: calc(100vh - 80px); overflow-y: auto; }
+            
+            /* Мобильное меню — сплошной фон, НЕ backdrop-filter */
+            #mobile-menu {
+                max-height: calc(100vh - 80px);
+                overflow-y: auto;
+                background: rgba(250, 249, 246, 0.98) !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                border-top: 1px solid #EAE6DD;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            }
+            
+            /* Навбар на мобиле — всегда сплошной */
+            #navbar {
+                background: rgba(250, 249, 246, 0.98) !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+            
+            .space-card .p-6 { padding: 1.25rem; }
+            .space-card h3 { font-size: 1.125rem; }
+        }
+        
+        /* Карта — защита от вылезания */
+        #map,
+        #map ymaps,
+        #map [class*="ymaps-"] {
+            max-width: 100% !important;
         }
     </style>
+<base target="_blank">
 <base target="_blank">
 </head>
 <body class="antialiased">
@@ -168,7 +205,8 @@
             </div>
         </div>
         
-        <div id="mobile-menu" class="hidden md:hidden bg-cream/98 nav-blur absolute w-full border-t border-cream-dark mt-4 shadow-lg">
+        <!-- МОБИЛЬНОЕ МЕНЮ — сплошной фон, без backdrop-filter -->
+        <div id="mobile-menu" class="hidden md:hidden absolute w-full mt-4">
             <div class="px-6 py-6 space-y-4">
                 <a href="#about" class="block text-sm tracking-widest uppercase text-dark-soft hover:text-gold py-2">О комплексе</a>
                 <a href="#spaces" class="block text-sm tracking-widest uppercase text-dark-soft hover:text-gold py-2">Помещения</a>
@@ -198,13 +236,13 @@
                     </div>
                     
                     <h1 class="font-serif text-4xl md:text-5xl lg:text-7xl leading-[1.1] mb-6 md:mb-8 text-dark opacity-0" id="hero-title">
-                        В центре Петербурга<br>
-                        <span class="italic text-gold">наедине с природой</span>
+                        БЦ Петровский<br>
+                        <span class="italic text-gold">место где ваш бизнес растет</span>
                     </h1>
                     
                     <p class="text-base md:text-lg text-gray-warm leading-relaxed mb-8 md:mb-10 max-w-lg opacity-0" id="hero-subtitle">
                         Петровский остров — офисы в парковой зоне дельты Невы. 
-                        Свежий воздух, тишина и престиж Крестовского. Аренда от 2 268 ₽ за м².
+                        Свежий воздух, тишина и статусная локация. Аренда от 2 268 ₽ за м².
                     </p>
                     
                     <div class="flex flex-wrap gap-3 md:gap-4 opacity-0" id="hero-buttons">
@@ -382,8 +420,7 @@
                     <div class="p-6 md:p-8">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="font-serif text-xl md:text-2xl text-dark">Готовый офис с отделкой</h3>
-                            <span class="text-gold font-medium text-sm">4-й этаж</span>
-                        </div>
+                            <span class="text-gold font-medium text-sm">*пример</span>
                         </div>
                         <p class="text-sm text-gray-warm mb-6">Современный ремонт, система вентиляции, панорамное остекление. Идеально для небольшой команды или представительства.</p>
                         <button onclick="openModal('Офис 4021, класс B+, 39 м²')" class="w-full btn-gold text-white py-3.5 md:py-4 text-[10px] md:text-xs tracking-widest uppercase font-medium rounded-sm">
@@ -400,8 +437,7 @@
                     <div class="p-6 md:p-8">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="font-serif text-xl md:text-2xl text-dark">Пустой офисный блок</h3>
-                            <span class="text-gold font-medium text-sm">1-й этаж</span>
-                        </div>
+                            <span class="text-gold font-medium text-sm">*пример</span>
                         </div>
                         <p class="text-sm text-gray-warm mb-6">Отдельный вход с улицы, удобно для клиентского сервиса или шоу-рума.</p>
                         <button onclick="openModal('Офис 107, класс B, 33.6 м²')" class="w-full btn-gold text-white py-3.5 md:py-4 text-[10px] md:text-xs tracking-widest uppercase font-medium rounded-sm">
@@ -436,7 +472,7 @@
                     <div class="space-y-3 md:space-y-4 text-gray-warm text-sm md:text-base leading-relaxed">
                         <p>
                             Бизнес-центр «Петровский» расположен в «зеленой зоне» Санкт-Петербурга на Петровском острове, 
-                            одном из островов дельты Невы при впадении ее в Финский залив.
+                            одним из островов дельты Невы при впадении ее в Финский залив.
                         </p>
                         <p>
                             Прекрасная экологическая обстановка и близость к центру города («золотого треугольника») 
@@ -574,7 +610,7 @@
                     </div>
                     
                     <!-- Map -->
-                    <div class="lg:col-span-3 relative h-[300px] md:h-[400px] lg:h-[600px]">
+                    <div class="lg:col-span-3 relative h-[300px] md:h-[400px] lg:h-[600px] overflow-hidden">
                         <div id="map" class="absolute inset-0 w-full h-full"></div>
                     </div>
                 </div>
@@ -590,7 +626,7 @@
                     </div>
                     <div>
                         <div class="font-medium text-dark text-sm md:text-base mb-1">Адрес</div>
-                        <div class="text-xs md:text-sm text-gray-warm">Санкт-Петербург, Петровская коса, д.1, кор.1, стр.1</div>
+                        <div class="text-xs md:text-sm text-gray-warm">Санкт-Петербург, Петровская коса, д. 1, корп. 1</div>
                     </div>
                 </div>
                 
@@ -782,14 +818,21 @@
             );
         });
         
-        // Navbar
+        // Navbar — Liquid Glass на десктопе, сплошной фон на мобиле
         const navbar = document.getElementById('navbar');
+        const isMobile = window.innerWidth < 768;
+        
         window.addEventListener('scroll', () => {
             if (window.pageYOffset > 100) {
-                navbar.classList.add('bg-cream/95', 'nav-blur', 'shadow-sm', 'py-3', 'md:py-4');
-                navbar.classList.remove('py-4', 'md:py-6');
+                if (isMobile) {
+                    navbar.classList.add('py-3', 'md:py-4');
+                    navbar.classList.remove('py-4', 'md:py-6');
+                } else {
+                    navbar.classList.add('nav-liquid-glass', 'py-3', 'md:py-4');
+                    navbar.classList.remove('py-4', 'md:py-6');
+                }
             } else {
-                navbar.classList.remove('bg-cream/95', 'nav-blur', 'shadow-sm', 'py-3', 'md:py-4');
+                navbar.classList.remove('nav-liquid-glass', 'py-3', 'md:py-4');
                 navbar.classList.add('py-4', 'md:py-6');
             }
         });
@@ -867,7 +910,7 @@
         
         // Yandex Maps
         let myMap, multiRoute;
-        const DEST_POINT = [59.9726, 30.2624];
+        const DEST_POINT = [59.962809, 30.251136];
         let currentRouteType = 'auto';
         
         ymaps.ready(initMap);
@@ -880,7 +923,7 @@
             });
             
             const placemark = new ymaps.Placemark(DEST_POINT, {
-                balloonContent: 'БЦ "Петровский"<br>Петровская коса, д.1, кор.1, стр.1<br>+7 (812) 346-88-87'
+                balloonContent: 'БЦ "Петровский"<br>Петровская коса, д. 1, корп. 1<br>+7 (812) 346-88-87'
             }, {
                 preset: 'islands#icon',
                 iconColor: '#B8956A'
